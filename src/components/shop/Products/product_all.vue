@@ -2,7 +2,7 @@
   <div class="productContainer">
     <loading :active.sync="isLoading"></loading>
     <ul>
-      <li v-for="item in products" :key="item.id">
+      <li v-for="item in products" :key="item.id" @click="getId(item.id)">
         <div>
             <img :src="item.imageUrl" alt="">
         </div>
@@ -17,7 +17,7 @@
 export default {
   data() {
     return {
-      produts: [],
+      products: [],
       isLoading: false,
     };
   },
@@ -32,10 +32,16 @@ export default {
         vm.isLoading = false;
       });
     },
+
+    getId(id) {
+      console.log(id);
+      this.$router.push(`iteminfo/${id}`);
+    },
   },
 
   created() {
     this.getProducts();
+    console.log(this.$route.params.select);
   },
 };
 </script>

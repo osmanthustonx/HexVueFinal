@@ -18,19 +18,19 @@ export default new Router({
       component: ContentPage,
       children: [
         {
-          path: '/shop/:select',
+          path: '/shop',
           name: 'Products',
           component: Products,
           children: [
             {
-              path: '',
+              path: ':select',
               name: 'All',
               component: All,
             },
           ],
         },
         {
-          path: 'itemInfo',
+          path: '/shop/iteminfo/:id',
           name: 'ItemInfo',
           component: ItemInfo,
         },
