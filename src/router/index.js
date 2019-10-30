@@ -4,6 +4,8 @@ import ContentPage from '@/components/ContentPage';
 import Products from '@/components/shop/Products';
 import All from '@/components/shop/Products/product_all';
 import ItemInfo from '@/components/shop/itemInfo';
+import Checkout from '@/components/shop/Checkout';
+import BillCheck from '@/components/shop/BillCheck';
 
 Vue.use(Router);
 
@@ -30,6 +32,16 @@ export default new Router({
           path: 'itemInfo',
           name: 'ItemInfo',
           component: ItemInfo,
+        },
+        {
+          path: 'checkout',
+          name: 'Checkout',
+          component: Checkout,
+        },
+        {
+          path: 'billcheck',
+          name: 'BillCheck',
+          component: BillCheck,
         },
       ],
     },

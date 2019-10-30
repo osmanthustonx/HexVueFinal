@@ -59,7 +59,9 @@
                 <i class="fas fa-heart"></i>
             </li>
             <li>
-                <i class="fas fa-shopping-cart"></i>
+                <router-link to="co">
+                    <i class="fas fa-shopping-cart"></i>
+                </router-link>
             </li>
         </ul>
     </div>
