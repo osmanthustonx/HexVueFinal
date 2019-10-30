@@ -50,6 +50,9 @@
               </button>
             </div>
           </div>
+          <button class="btn btn-outline-secondary" type="button">
+            下一步
+          </button>
         </div>
       </div>
     </div>
@@ -68,9 +71,42 @@ export default {
   },
 
   methods: {
-    addCouponCode() {
-
+    getCart() {
+      const vm = this;
+      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
+      vm.isLoading = true;
+      this.$http.get(api).then((response) => {
+        vm.cart = response.data.data;
+        console.log(vm.cart);
+        vm.isLoading = false;
+      });
     },
+    removeCartItem(id) {
+      const vm = this;
+      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart/${id}`;
+      vm.isLoading = true;
+      this.$http.delete(api).then(() => {
+        vm.getCart();
+        vm.isLoading = false;
+      });
+    },
+    addCouponCode() {
+      const vm = this;
+      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/coupon `;
+      const coupon = {
+        code: vm.coupon_code,
+      };
+      vm.isLoading = true;
+      this.$http.post(api, { data: coupon }).then((response) => {
+        console.log(response);
+        vm.getCart();
+        vm.isLoading = false;
+      });
+    },
+  },
+
+  created() {
+    this.getCart();
   },
 };
 </script>
