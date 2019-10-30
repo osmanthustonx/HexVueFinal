@@ -6,6 +6,7 @@ import All from '@/components/shop/Products/product_all';
 import ItemInfo from '@/components/shop/itemInfo';
 import Checkout from '@/components/shop/Checkout';
 import BillCheck from '@/components/shop/BillCheck';
+import Coupon from '@/components/shop/useCoupon';
 
 Vue.use(Router);
 
@@ -32,6 +33,11 @@ export default new Router({
           path: 'itemInfo',
           name: 'ItemInfo',
           component: ItemInfo,
+        },
+        {
+          path: 'coupon',
+          name: 'Coupon',
+          component: Coupon,
         },
         {
           path: 'checkout',
