@@ -1,29 +1,17 @@
 <template>
   <div class="container itemContent">
     <div class="imgWrap">
-      <img src="https://cdn.shopify.com/s/files/1/0062/4918/5349/products/pnycomp27473_1_900x.jpg?v=1555479975" alt="">
+      <img :src="product.imageUrl" alt="">
     </div>
     <ul class="itemInfo">
       <li>
-        <h2>我是滑板抬頭額</h2>
+        <h2>{{product.title}}</h2>
       </li>
       <li class="product-feature">
-        THE ARTIST HIMSELF
-
-        DRAWN AS A CAMEL
-
-        PROBABLY BECAUSE EVERYTHING HE EVER WORE
-
-        HAS BEEN CAMEL TONED
-
-        THE IDENTIFICATION IS REAL
-
-        GENERATOR WOOD AS ALWAYS
-
-        FREE GRIPTAPE
+        {{product.content}}
       </li>
-      <li class="origin">NT$ 5000</li>
-      <li class="final mb-3">NT$ 1000</li>
+      <li class="origin">NT$ {{product.origin_price}}</li>
+      <li class="final mb-3">NT$ {{product.price}}</li>
       <li>
         <div class="row item--btns">
           <div class="col-7">
@@ -47,8 +35,8 @@
             </div>
           </div>
           <div class="col-5">
-            <button class="btn btn-outline-primary item--btn">
-              <i class="fas fa-spinner fa-spin"></i>
+            <button class="btn btn-outline-primary item--btn" @click="addtoCart(product.id,count)">
+              <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === product.id"></i>
               加入購物車
             </button>
           </div>
@@ -65,6 +53,7 @@ export default {
     return {
       count: 1,
       cart: {},
+      product: {},
       status: {
         loadingItem: '',
       },
@@ -72,8 +61,16 @@ export default {
   },
   methods: {
     getProduct() {
-
+      const vm = this;
+      const id = this.$route.params.id;
+      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/product/${id}`;
+      vm.status.loadingItem = id;
+      this.$http.get(api).then((response) => {
+        vm.product = response.data.product;
+        vm.status.loadingItem = '';
+      });
     },
+
     addtoCart(id, qty = 1) {
       const vm = this;
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
@@ -84,11 +81,13 @@ export default {
       };
       this.$http.post(api, { data: cart }).then((response) => {
         vm.status.loadingItem = '';
-        // vm.getCart();
-        // eslint-disable-next-line no-console
         console.log(response);
       });
     },
+  },
+
+  created() {
+    this.getProduct();
   },
 };
 </script>

@@ -34,7 +34,6 @@ export default {
     },
 
     getId(id) {
-      console.log(id);
       this.$router.push(`iteminfo/${id}`);
     },
   },
