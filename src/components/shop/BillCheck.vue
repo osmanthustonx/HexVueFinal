@@ -72,5 +72,29 @@ export default {
       orderId: '',
     };
   },
+  methods: {
+    getOrder() {
+      const vm = this;
+      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/order/${vm.orderId}`;
+      this.$http.get(api).then((response) => {
+        vm.order = response.data.order;
+        console.log(vm.order);
+      });
+    },
+    payOrder() {
+      const vm = this;
+      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/pay/${vm.orderId}`;
+      this.$http.post(api).then((response) => {
+        console.log(response);
+        if (response.data.success) {
+          vm.getOrder();
+        }
+      });
+    },
+  },
+  created() {
+    this.orderId = this.$route.params.orderId;
+    this.getOrder();
+  },
 };
 </script>

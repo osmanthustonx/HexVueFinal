@@ -45,7 +45,7 @@ export default new Router({
           component: Checkout,
         },
         {
-          path: 'billcheck',
+          path: 'billcheck/:orderId',
           name: 'BillCheck',
           component: BillCheck,
         },

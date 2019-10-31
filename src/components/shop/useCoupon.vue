@@ -50,9 +50,7 @@
               </button>
             </div>
           </div>
-          <button class="btn btn-outline-secondary" type="button">
-            下一步
-          </button>
+          <router-link class="btn btn-outline-secondary" to="checkout">下一步</router-link>
         </div>
       </div>
     </div>
